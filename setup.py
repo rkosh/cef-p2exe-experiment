@@ -15,6 +15,12 @@ class Target(object):
 
 data_files = []
 data_files.append(("lib", glob(r'C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\redist\x86\Microsoft.VC90.CRT\*.*')))
+cef_data_files = ['cef.pak', 'cef_100_percent.pak', 'cef_200_percent.pak', 'cef_extensions.pak', 'locales\\en-US.pak', 'icudtl.dat',
+                    'natives_blob.bin', 'snapshot_blob.bin', 'subprocess.exe']
+
+module = __import__('cefpython3')
+cef_data_files_paths = [os.path.join(module.__path__[0], cef_file) for cef_file in cef_data_files]
+data_files.append(("lib", cef_data_files_paths))
 options = dict(
     dist_dir=tmp_dist_dir, optimize=2, bundle_files=3, dll_excludes=['w9xpopen.exe', 'msvcp100.dll', 'msvcp140.dll',
     'msvcr100.dll', 'msvcr140.dll', 'msvcr71.dll', 'python34.dll', 'python35.dll', 'python36.dll', 'python37.dll',
@@ -36,6 +42,7 @@ main_exe = Target(
 )
 
 setup(
+    zipfile="lib/modules.zip",
     data_files=data_files,
     options=dict(py2exe=options),
     windows=[main_exe]
