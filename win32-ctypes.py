@@ -3,25 +3,19 @@ import sys
 from ctypes import *
 
 import win32con
-from cefpython3 import cefpython as cef
 from winerror import ERROR_ALREADY_EXISTS
 
+import urllib
+import json
 import win32gui
 from win32api import GetLastError
 from win32event import CreateMutex
+
 
 WNDPROC = WINFUNCTYPE(c_long, c_int, c_uint, c_int, c_int)
 
 NULL = c_int(win32con.NULL)
 _user32 = windll.user32
-
-
-def main():
-    sys.excepthook = cef.ExceptHook  # To shutdown all CEF processes on error
-    cef.Initialize()
-    cef.CreateBrowserSync(url="https://www.google.com/", window_title="Hello World!")
-    cef.MessageLoop()
-    cef.Shutdown()
 
 
 def ErrorIfZero(handle):
@@ -266,14 +260,11 @@ def RunWin32Gui():
     # two-stage creation for Win32 windows
     hello = HelloWindow()
 
-    # register window class…
     wndclass = WNDCLASS(WNDPROC(hello.WndProc))
     wndclass.lpszClassName = u"HelloWindow"
 
     if not _user32.RegisterClassW(byref(wndclass)):
         raise WinError()
-
-    # …then create Window
 
     hello.Create(
         className=wndclass.lpszClassName,
@@ -289,5 +280,4 @@ def RunWin32Gui():
 
 
 if __name__ == "__main__":
-    main()
     RunWin32Gui()
