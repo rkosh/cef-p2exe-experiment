@@ -14,9 +14,6 @@ class Target(object):
         self.company_name = "Lame"
 
 data_files = []
-for parent, dirs, files in os.walk("res"):
-    files[:] = filter(lambda name: name.lower() != "thumbs.db", files)
-    data_files.append((parent, map(lambda name: parent + "\\" + name, files)))
 data_files.append(("lib", glob(r'C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\redist\x86\Microsoft.VC90.CRT\*.*')))
 options = dict(
     dist_dir=tmp_dist_dir, optimize=2, bundle_files=3, dll_excludes=['w9xpopen.exe', 'msvcp100.dll', 'msvcp140.dll',
