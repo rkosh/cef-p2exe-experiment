@@ -4,7 +4,7 @@ from glob import glob
 import py2exe # noqa
 import os
 
-tmp_dist_dir = os.path.join(os.path.curdir, "\\dist")
+tmp_dist_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "dist")
 
 class Target(object):
     def __init__(self, **kw):
