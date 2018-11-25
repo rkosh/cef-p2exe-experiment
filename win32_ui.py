@@ -97,10 +97,3 @@ def TestGradientFill():
         time.sleep(0.3)
     win32gui.DestroyWindow(hwnd)
     win32gui.UnregisterClass(class_atom,None)
-
-print "Enumerating all windows..."
-TestEnumWindows()
-print "Testing drawing functions ..."
-TestSetWorldTransform()
-TestGradientFill()
-print "All tests done!"
