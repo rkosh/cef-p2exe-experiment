@@ -35,7 +35,7 @@ main_exe = Target(
     version="1.2.3.4",
     script="win_ui.py",
     icon_resources=[(0, "app.ico")],
-    dest_base="main_exe",
+    dest_base="main",
 )
 
 setup(
