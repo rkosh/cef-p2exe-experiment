@@ -33,7 +33,7 @@ options = dict(
 main_exe = Target(
     description="Some Name",
     version="1.2.3.4",
-    script="win_ui.py",
+    script="win32_ui.py",
     icon_resources=[(0, "app.ico")],
     dest_base="main",
 )
