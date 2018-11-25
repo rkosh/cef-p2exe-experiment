@@ -33,9 +33,9 @@ options = dict(
 main_exe = Target(
     description="Some Name",
     version="1.2.3.4",
-    script="win_ui.py",
+    script="cef_ui.py",
     icon_resources=[(0, "app.ico")],
-    dest_base="main_exe",
+    dest_base="main",
 )
 
 setup(
