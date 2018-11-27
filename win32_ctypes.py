@@ -1,16 +1,17 @@
+import json
 import platform
 import sys
+import urllib.error
+import urllib.parse
+import urllib.request
 from ctypes import *
 
 import win32con
 from winerror import ERROR_ALREADY_EXISTS
 
-import urllib
-import json
 import win32gui
 from win32api import GetLastError
 from win32event import CreateMutex
-
 
 WNDPROC = WINFUNCTYPE(c_long, c_int, c_uint, c_int, c_int)
 
@@ -64,7 +65,7 @@ class WNDCLASS(Structure):
         clsExtra=0,
         wndExtra=0,
         menuName=None,
-        className=u"PythonWin32",
+        className="PythonWin32",
         instance=None,
         icon=None,
         cursor=None,
@@ -175,8 +176,8 @@ class Window(object):
     def Create(
         self,
         exStyle=0,  #  DWORD dwExStyle
-        className=u"WndClass",
-        windowName=u"Window",
+        className="WndClass",
+        windowName="Window",
         style=win32con.WS_OVERLAPPEDWINDOW,
         x=win32con.CW_USEDEFAULT,
         y=win32con.CW_USEDEFAULT,
@@ -244,7 +245,7 @@ class HelloWindow(Window):
         rect = self.GetClientRect()
         flags = win32con.DT_SINGLELINE | win32con.DT_CENTER | win32con.DT_VCENTER
         _user32.DrawTextW(
-            c_int(hdc), u"Hello, world! You may exit now", c_int(-1), byref(rect), flags
+            c_int(hdc), "Hello, world! You may exit now", c_int(-1), byref(rect), flags
         )
         _user32.EndPaint(c_int(self.hwnd), byref(ps))
         return 0
@@ -263,7 +264,7 @@ def RunWin32Gui():
     hello = HelloWindow()
 
     wndclass = WNDCLASS(WNDPROC(hello.WndProc))
-    wndclass.lpszClassName = u"HelloWindow"
+    wndclass.lpszClassName = "HelloWindow"
 
     if not _user32.RegisterClassW(byref(wndclass)):
         raise WinError()
@@ -271,7 +272,7 @@ def RunWin32Gui():
     hello.Create(
         className=wndclass.lpszClassName,
         instance=wndclass.hInstance,
-        windowName=u"Hello World",
+        windowName="Hello World",
     )
 
     # Show Window

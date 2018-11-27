@@ -1,7 +1,6 @@
+import cef_ui
 import win32_ctypes
 import win32_ui
-import cef_ui
-
 
 win32_ctypes.RunWin32Gui()
 print("Enumerating all windows...")

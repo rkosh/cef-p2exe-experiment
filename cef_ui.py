@@ -1,8 +1,10 @@
-import platform
-import sys
-import urllib
 import json
 import os
+import platform
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
 
 from cefpython3 import cefpython as cef
 
