@@ -243,7 +243,9 @@ class HelloWindow(Window):
         hdc = _user32.BeginPaint(c_int(self.hwnd), byref(ps))
         rect = self.GetClientRect()
         flags = win32con.DT_SINGLELINE | win32con.DT_CENTER | win32con.DT_VCENTER
-        _user32.DrawTextW(c_int(hdc), u"Hello, world! You may exit now", c_int(-1), byref(rect), flags)
+        _user32.DrawTextW(
+            c_int(hdc), u"Hello, world! You may exit now", c_int(-1), byref(rect), flags
+        )
         _user32.EndPaint(c_int(self.hwnd), byref(ps))
         return 0
 
