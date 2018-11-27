@@ -24,6 +24,23 @@ data_files.append(
         ),
     )
 )
+cef_data_files = [
+    "cef.pak",
+    "cef_100_percent.pak",
+    "cef_200_percent.pak",
+    "cef_extensions.pak",
+    "locales\\en-US.pak",
+    "icudtl.dat",
+    "natives_blob.bin",
+    "snapshot_blob.bin",
+    "subprocess.exe",
+]
+
+module = __import__("cefpython3")
+cef_data_files_paths = [
+    os.path.join(module.__path__[0], cef_file) for cef_file in cef_data_files
+]
+data_files.append(("lib", cef_data_files_paths))
 options = dict(
     dist_dir=tmp_dist_dir,
     optimize=2,
@@ -71,4 +88,9 @@ main_exe = Target(
     dest_base="main",
 )
 
-setup(data_files=data_files, options=dict(py2exe=options), windows=[main_exe])
+setup(
+    zipfile="lib/modules.zip",
+    data_files=data_files,
+    options=dict(py2exe=options),
+    windows=[main_exe],
+)
