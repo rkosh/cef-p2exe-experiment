@@ -2,9 +2,7 @@ import json
 import os
 import platform
 import sys
-import urllib.error
-import urllib.parse
-import urllib.request
+import urllib
 
 from cefpython3 import cefpython as cef
 
